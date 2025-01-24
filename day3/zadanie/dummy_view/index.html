@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy View Example</title>
+    <style>
+        .dummy-view {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Error message styling */
+        .dummy-view-error {
+            color: #ff4d4d;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        /* Data section styling */
+        .dummy-view-data {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* City name styling */
+        .dummy-view-city {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+
+        /* Icon image styling */
+        .dummy-view-icon img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        /* Wind speed styling */
+        .dummy-view-windSpeed {
+            font-size: 20px;
+            color: #555;
+        }
+
+        /* Hiding elements */
+        .dummy-view .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mounting-point"></div>
+    <script type="module">
+        import WeatherDummyView from "./weatherDummyView.mjs";
+        import CurrentTimeWeatherModel from "../model_event/modelEvent.mjs";
+
+        const wm = new CurrentTimeWeatherModel;
+        const wv = new WeatherDummyView(wm);
+        document.body.appendChild(wv.getEl());
+        //...
+        wm.update("Poznan");
+    </script>
+</body>
+
+</html>
