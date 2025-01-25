@@ -1,6 +1,7 @@
 import cfg from "../cfg.mjs";
+import { EventEmitter } from "../event_emitter/eventEmitter.mjs";
 
-export default class CurrentTimeWeatherModel {
+export default class CurrentTimeWeatherModel extends EventEmitter {
     #urlFormat = `https://api.openweathermap.org/data/2.5/weather?q={city}&appid=${cfg?.openWeatherMap.key}&units=metric`;
     #abortController;
     #weatherDetails; // {data: ..., error: ...}
@@ -17,10 +18,12 @@ export default class CurrentTimeWeatherModel {
             });
 
             if (!resp.ok) {
+                const errMsg = `Fetch failed, status: ${resp.status}`;
                 this.#weatherDetails = {
                     data: null,
-                    error: `Fetch failed, status: ${resp.status}`,
+                    error: errMsg,
                 };
+                this.dispatch("error");
                 return;
             }
             const respWeatherData = await resp.json();
@@ -33,47 +36,21 @@ export default class CurrentTimeWeatherModel {
                 },
                 error: null,
             }
+            this.dispatch("load");
         } catch(err) {
             this.#weatherDetails = {
                 data: null,
                 error: err.message,
             };
+            this.dispatch("error");
         }
-
-        // fetch(this.#urlFormat.replace("{city}", city))
-        // .then(resp => {
-        //     if (!resp.ok) {
-        //         this.#weatherDetails = {
-        //             data: null,
-        //             error: `Fetch failed, status: ${resp.status}`,
-        //         };
-        //         return;
-        //     }
-        //     return resp.json();
-        // })
-        // .then(respWeatherData => {
-        //     this.#weatherDetails = {
-        //         data: {
-        //             city: respWeatherData.name,
-        //             temp: respWeatherData.main.temp,
-        //             windSpeed: respWeatherData.wind.speed,
-        //             icon: respWeatherData.weather[0].icon,
-        //         },
-        //         error: null,
-        //     };
-        // })
-        // .catch(err => {
-        //     this.#weatherDetails = {
-        //         data: null,
-        //         error: `Fetch failed: ${err.message}`,
-        //     };
-        // });
     }
 
     toJSON() {
         return {...this.#weatherDetails};
     }
 }
+
 // const currTimeWeatherModel = new CurrentTimeWeatherModel;
 // currTimeWeatherModel.update("Poznan");
 // currTimeWeatherModel.update("Warsaw", true);

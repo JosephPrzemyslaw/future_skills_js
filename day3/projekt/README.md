@@ -85,14 +85,10 @@ Zaimplementuj osobno obsługę zdarzeń
 
 #### 2) Zaimplementuj własną klasę `EventEmitter` z ograniczonym interfejsem:
 ```javascript
-type EventData = {
-    details: Record<string, any>,
-}
-
-on(eventName:string, (eventData?: EventData) => any);
-addEventListener(eventName:string, (eventData?: EventData) => any);
-off(eventName:string, (eventData?: EventData) => any);
-removeEventListener(eventName:string, (eventData?: EventData) => any);
+on(eventName:string, (eventData?: any) => any);
+addEventListener(eventName:string, (eventData?: any) => any);
+off(eventName:string, (eventData?: any) => any);
+removeEventListener(eventName:string, (eventData?: any) => any);
 // on && addEventListener to aliasy
 // off && removeEventListener to aliasy
 ```
@@ -101,26 +97,22 @@ removeEventListener(eventName:string, (eventData?: EventData) => any);
 ```javascript
 const em = new EventEmitter;
 const handleUpdateEvent1 = eventData => {
-    console.log("handleUpdateEvent1", eventData?.details);
+    console.log("handleUpdateEvent1", eventData);
 }
 const handleUpdateEvent2 = eventData => {
-    console.log("handleUpdateEvent2", eventData?.details);
+    console.log("handleUpdateEvent2", eventData);
 }
 
 em.on("update", handleUpdateEvent1);
 em.addEventListener("update", handleUpdateEvent2);
 em.dispatch("update", {
-    details: {
-        newData: true,
-    },
+    newData: true,
 });
 //...
 em.off("update", handleUpdateEvent1);
 em.removeEventListener("update", handleUpdateEvent2);
 em.dispatch("update", {
-    details: {
-        newData: true,
-    },
+    newData: true,
 });
 //...
 ```
@@ -167,7 +159,7 @@ export class EventEmitter {
 #### Dodatkowe
 Metoda `once` sprawia, że `callback` wołany jest **tylko raz**, tj. po pierwszym wystąpieniu zdarzenia. Przedstaw potencjalną implementację.
 ```javascript
-once(eventName:string, (eventData?: EventData) => any)
+once(eventName:string, (eventData?: any) => any)
 ```
 
 <br>

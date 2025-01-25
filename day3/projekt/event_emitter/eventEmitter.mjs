@@ -37,23 +37,21 @@ export class EventEmitter {
     }
 }
 
-const em = new EventEmitter;
-const handleUpdateEvent1 = eventData => {
-    console.log("handleUpdateEvent1", eventData?.details);
-}
-const handleUpdateEvent2 = eventData => {
-    console.log("handleUpdateEvent2", eventData?.details);
-}
+// const em = new EventEmitter;
+// const handleUpdateEvent1 = eventData => {
+//     console.log("handleUpdateEvent1", eventData);
+// }
+// const handleUpdateEvent2 = eventData => {
+//     console.log("handleUpdateEvent2", eventData);
+// }
 
-em.on("update", handleUpdateEvent1); // update -> [handleUpdateEvent1]
-em.addEventListener("update", handleUpdateEvent2); // update -> [handleUpdateEvent1, handleUpdateEvent2]
-em.dispatch("update", {
-    details: {
-        refresh: true,
-    }
-});
-//...
-em.off("update", handleUpdateEvent1);
-em.removeEventListener("update", handleUpdateEvent2);
-em.dispatch("update");
-//...
+// em.on("update", handleUpdateEvent1); // update -> [handleUpdateEvent1]
+// em.addEventListener("update", handleUpdateEvent2); // update -> [handleUpdateEvent1, handleUpdateEvent2]
+// em.dispatch("update", {
+//     refresh: true,
+// });
+// //...
+// em.off("update", handleUpdateEvent1);
+// em.removeEventListener("update", handleUpdateEvent2);
+// em.dispatch("update");
+// //...
