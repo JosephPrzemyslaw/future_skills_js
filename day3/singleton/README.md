@@ -3,16 +3,16 @@
 Poniższy kod stara się implementować singleton ale nie jest kompletny. Pokaż jak można utworzyć wiele obiektów People
 
 ```js
-const People = {
-    #names: [],
-    #ages: [],
+class People {
+    #names = [];
+    #ages = [];
     add(person) {
         this.#names.push(person.name);
         this.#ages.push(person.age);
-    },
+    }
     print() {
-        for (let i = 0; i < names.length; i ++) {
-            console.log(names[i], ages[i]);
+        for (let i = 0; i < this.#names.length; i ++) {
+            console.log(this.#names[i], this.#ages[i]);
         }
     }
 };
@@ -22,7 +22,7 @@ export default new People;
 
 <br>
 
-# Zadanie
+# Zadanie [file_system]
 ## Opis
 Uzupełnij implementację tak aby konstruktor implementował `singleton`
 

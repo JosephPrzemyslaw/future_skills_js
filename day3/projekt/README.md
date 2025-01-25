@@ -46,7 +46,7 @@ type WeatherData = {
 
 Szkielet
 ```js
-export default class CurrentTimeWeatherModel extends ??? {
+export default class CurrentTimeWeatherModel {
     #urlFormat = `https://api.openweathermap.org/data/2.5/weather?q={city}&appid=08fa1b19f2541e554b840b180814ad08`;
     #abortController;
     #weatherDetails;
@@ -63,8 +63,8 @@ export default class CurrentTimeWeatherModel extends ??? {
 
 ## Użycie
 ```js
-const currTimeWeatherMap = new CurrentTimeWeatherMap;
-await currTimeWeatherMap.update("Poznan");
+const currTimeWeatherModel = new CurrentTimeWeatherModel;
+await currTimeWeatherModel.update("Poznan");
 //..
 currTimeWeatherMap.update("Warsaw");
 //...
