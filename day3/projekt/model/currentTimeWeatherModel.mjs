@@ -6,8 +6,6 @@ export default class CurrentTimeWeatherModel {
     #weatherDetails; // {data: ..., error: ...}
 
     async update(city, cancel = false) {
-        console.log("Request:", city);
-
         if(this.#abortController && cancel) {
             this.#abortController.abort();
         }
@@ -23,7 +21,6 @@ export default class CurrentTimeWeatherModel {
                     data: null,
                     error: `Fetch failed, status: ${resp.status}`,
                 };
-                console.log("Request handled, error:", city);
                 return;
             }
             const respWeatherData = await resp.json();
@@ -36,13 +33,11 @@ export default class CurrentTimeWeatherModel {
                 },
                 error: null,
             }
-            console.log("Request handled:", city);
         } catch(err) {
             this.#weatherDetails = {
                 data: null,
                 error: err.message,
             };
-            console.log("Request handled, error:", city);
         }
 
         // fetch(this.#urlFormat.replace("{city}", city))
