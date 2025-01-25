@@ -17,7 +17,7 @@ wewnętrzną reprezentację modelu:
 
 {
     data: WeatherData,
-    error: boolean,
+    error: string,
 }
 ```
 np.:
