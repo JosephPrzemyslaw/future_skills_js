@@ -110,7 +110,6 @@
             max-width: 60%;
             margin-bottom: 10px;
         }
-
         .dummy-view {
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -177,12 +176,14 @@
     <script type="module">
         import WeatherViewContainer from "./container.mjs";
         import WeatherController from "./controller.mjs";
-        import CurrentTimeWeatherModel from "../model_event/modelEvent.mjs";
+        import CurrentTimeWeatherModel from "../model_event/currentTimeWeatherModel.mjs";
 
         const weatherContainer = new WeatherViewContainer;
         document.body.appendChild(weatherContainer.getEl());
 
         const weatherController = new WeatherController(weatherContainer);
+        // weatherController.addWheatherView("Poznan");
+        // weatherController.addWheatherView("Gniezno");
     </script>
 </body>
 
